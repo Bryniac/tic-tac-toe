@@ -327,7 +327,166 @@ body {
     outline: none;
   }
   
-  /* Optional: Adding a small "pulse" effect when switching between modes for visual feedback */
+  
   #memoryToggle:hover {
     transform: scale(1.1);
   }
+
+/*-----------------------HELP MODAL------------------------------*/
+.help-floating-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  font-size: 1.2rem;
+  background-color: #586e75;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  transition: transform 0.3s;
+}
+
+.help-floating-btn:hover {
+  transform: scale(1.1);
+}
+/*-----------content-----------------*/
+.modal-content.help-content {
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 1rem;
+  position: relative;
+}
+
+/*-----------closebtn-----------------*/
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #999;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.close-btn:hover {
+  color: #333;
+}
+
+body.dark .close-btn {
+  color: #ccc;
+}
+
+body.dark .close-btn:hover {
+  color: #fff;
+}
+
+/*----------modes content------*/
+
+.mode-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mode-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  font-size: 1.2rem;
+  border-radius: 50%;
+  color: white;
+  flex-shrink: 0;
+}
+
+.mode-icon.current {
+  background-color: gray;
+}
+
+.mode-icon.memory {
+  background-color: yellow;
+  color: black;
+}
+
+.mode-icon.extreme {
+  background-color: red;
+}
+
+/*------------LANG-------------------*/
+.lang-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 1001;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  
+  /* center & cover the flag SVG */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Specific classes for each language */
+.lang-btn.en { background-image: url('lang/svg/us.svg'); }
+.lang-btn.es { background-image: url('lang/svg/es.svg'); }
+
+.lang-menu {
+  position: fixed;
+  top: 20px;
+  width: 140px;
+  left: 70px;
+  background: #c4fcbb;;
+  border-radius: 6px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  z-index: 1002;
+}
+
+body.dark .lang-menu{
+  background: #073642;
+  color: #93a1a1;
+}
+
+.lang-menu button {
+  
+  width: 100%;
+  font-size: 1rem;
+  background: none;
+  gap: 15px;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  color: black;
+  margin-bottom: 10px;
+}
+
+body.dark .lang-menu button{
+  color: #93a1a1;
+}
+
+.lang-menu button:hover {
+  background-color: #10855e;
+}
+
+.hidden {
+  display: none;
+}
+
+.flag-icon {
+  width: 40px;   
+  height: auto;
+  border-radius: 50%;
+  vertical-align: middle;
+}

@@ -1,13 +1,10 @@
-// First, your board and game logic (this should run immediately when the script loads)
+// Board and game vars
 const board = document.getElementById('board');
 const boardSize = 3;
 let currentPlayer = 'O';
-/*  commenting just in case
-let memoryMode = true; //highlights modes
-let extremeMode = false; // Extreme Mode variable with no highlights
-*/
 let mode = 'current'; // Possible values: 'current', 'memory', 'extreme'
 let score = { X: 0, O: 0 };
+let translations = {};  // global storage for languages
 
 // Buttons
 const resetGameBtn = document.getElementById('resetGameBtn');
@@ -68,7 +65,9 @@ function endGame(winner) {
 
 //pop up for winner
 function showWinnerModal(winner) {
-  winnerMessage.textContent = `${winner} wins! 🎉`;
+  const template = translations.winnerMessage || "{winner} wins! 🎉";
+  const message = template.replace("{winner}", winner);
+  winnerMessage.innerHTML = message;
   winnerModal.classList.remove('hidden');
 }
 
@@ -114,7 +113,7 @@ board.addEventListener('click', (e) => {
   cell.textContent = currentPlayer;
   playerMoves.push({ index });
 
-  updateBoardHighlighting(); // <- move this to be called right after a move
+  updateBoardHighlighting(); 
 
   if (playerMoves.length === 3) {
     const winningCombo = checkWin(playerMoves);
@@ -125,7 +124,7 @@ board.addEventListener('click', (e) => {
     }
   }
 
-  // ✅ Always switch players if game is not over
+  //Always switch players if game is not over
   currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
 });
 
@@ -146,33 +145,6 @@ resetGameBtn.addEventListener('click', () => {
   resetBoard();
 });
 
-/*
-// Memory mode toggle
-memoryToggle.addEventListener('click', () => {
-  if (extremeMode) {
-    // Switch to Memory Mode
-    extremeMode = false;
-    memoryMode = true;
-    memoryToggle.textContent = '🧠';
-    memoryToggle.className = 'brain-floating-btn memory'; // ✅ keep floating style
-  } else if (memoryMode) {
-    // Switch to Extreme Mode
-    memoryMode = false;
-    extremeMode = true;
-    memoryToggle.textContent = '💀';
-    memoryToggle.className = 'brain-floating-btn extreme'; // ✅ keep floating style
-  } else {
-    // Switch to Current Player Mode
-    memoryMode = false;
-    extremeMode = false;
-    memoryToggle.textContent = '🧠';
-    memoryToggle.className = 'brain-floating-btn current'; // ✅ keep floating style
-  }
-
-  updateBoardHighlighting();
-});
-*/
-
 memoryToggle.addEventListener('click', () => {
   // Cycle between modes
   if (mode === 'current') {
@@ -192,33 +164,7 @@ memoryToggle.addEventListener('click', () => {
   updateBoardHighlighting();
 });
 
-/*
-// Function to update board highlighting based on the current mode
-function updateBoardHighlighting() {
-  if (extremeMode) {
-    // Extreme Mode: No highlighting during gameplay, just show the winning combo
-    board.querySelectorAll('.cell').forEach(cell => {
-      cell.classList.remove('highlight');
-    });
-  } else if (memoryMode) {
-    // Memory Mode (highlight both players' oldest)
-    ['X', 'O'].forEach(p => {
-      const list = moves[p];
-      if (list.length === 3) {
-        const oldestIndex = list[0].index;
-        board.children[oldestIndex].classList.add('highlight');
-      }
-    });
-  } else {
-    // Current Player Highlight (highlight only the current player's oldest)
-    const activeMoves = moves[currentPlayer];
-    if (activeMoves.length === 3) {
-      const oldestIndex = activeMoves[0].index;
-      board.children[oldestIndex].classList.add('highlight');
-    }
-  }
-}
-*/
+
 
 function updateBoardHighlighting() {
   board.querySelectorAll('.cell').forEach(c => c.classList.remove('highlight'));
@@ -243,7 +189,7 @@ function updateBoardHighlighting() {
 }
 
 //THEMES TOGGLE
-// Wait for the DOM to be fully loaded before executing the script
+
 document.addEventListener('DOMContentLoaded', () => {
   // Get the theme toggle button
   const themeToggleButton = document.getElementById('themeToggle');
@@ -266,3 +212,83 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
+// Load help modal from external HTML
+fetch('help.html')
+  .then(res => res.text())
+  .then(html => {
+    document.body.insertAdjacentHTML('beforeend', html);
+
+    // Set up modal toggle logic once it's added to DOM
+    const helpToggle = document.getElementById('helpToggle');
+    const helpModal = document.getElementById('helpModal');
+    const closeHelp = document.getElementById('closeHelp');
+
+    helpToggle.addEventListener('click', () => {
+      helpModal.classList.remove('hidden');
+    });
+
+    closeHelp.addEventListener('click', () => {
+      helpModal.classList.add('hidden');
+    });
+
+    // Close modal on click outside content
+    window.addEventListener('click', (e) => {
+      if (e.target === helpModal) {
+        helpModal.classList.add('hidden');
+      }
+    });
+
+    // Close modal on ESC key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !helpModal.classList.contains('hidden')) {
+        helpModal.classList.add('hidden');
+      }
+    });
+  });
+
+// Load language from JSON files
+function loadLanguage(lang) {
+  fetch(`lang/${lang}.json`)
+    .then(res => res.json())
+    .then(strings => {
+      translations = strings;           // save for later
+      applyTranslations();              // immediately translate data-i18n elements
+      updateLanguageButton(lang);
+    });
+}
+
+function applyTranslations() {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (translations[key]) {
+      el.innerHTML = translations[key];
+    }
+  });
+}
+
+
+// Update button with selected flag icon
+function updateLanguageButton(lang) {
+  const btn = document.getElementById('languageToggle');
+  btn.classList.remove('en', 'es');
+  btn.classList.add(lang);
+}
+
+// Language menu toggle logic
+document.getElementById('languageToggle').addEventListener('click', () => {
+  document.getElementById('languageMenu').classList.toggle('hidden');
+});
+
+// Switch language when a user selects it
+document.querySelectorAll('#languageMenu button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const lang = btn.dataset.lang;
+    loadLanguage(lang);
+    document.getElementById('languageMenu').classList.add('hidden');
+  });
+});
+
+// On page load
+const savedLang = localStorage.getItem('lang') || 'en';
+loadLanguage(savedLang);

@@ -1,0 +1,16 @@
+{
+    
+    "title": "Triki: Memoriza",
+    "resetScore": "Reiniciar Puntuación",
+    "resetGame": "Reiniciar Juego",
+    "playAgain": "Jugar de Nuevo",
+    "winnerMessage": "¡{winner} es el ganador! 🎉",
+
+    "howToPlayTitle": "Cómo jugar",
+    "howToPlayDesc": "¡Triki! Solo puedes tener 3 marcas en el tablero a la vez. Cuando pongas una cuarta, tu pieza más antigua desaparece. No puedes colocar una pieza donde ya haya una — debes esperar a que desaparezca. ¡Usa este tiempo a tu favor y vence a tu oponente!",
+    "modesTitle": "Modos de juego",
+    "currentMode": "Destaca la pieza más antigua del <strong>jugador actual</strong>",
+    "memoryMode": "Destaca la pieza más antigua de <strong>ambos jugadores</strong>",
+    "extremeMode": "<strong>No hay ayudas en absoluto</strong>",
+    "clickToSwitch": "<strong>Haz clic en el icono de cerebro/cráneo en la esquina para cambiar de modo.</strong>"
+  }
