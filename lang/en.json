@@ -7,7 +7,7 @@
     "winnerMessage": "{winner} is the winner! 🎉",
     
     "howToPlayTitle": "How to Play",
-    "howToPlayDesc": "Tic Tac Toe with a twist! You can only have 3 marks on the board at a time. When you place a 4th, your oldest piece disappears. You can't place a piece where one still exists — you must wait for it to disappear. Use this timing to your advantage and outsmart your opponent!",
+    "howToPlayDesc": "Tic Tac Toe with a twist! You can only have 3 marks on the board at a time. <br>When you place a 4th, your oldest piece disappears. You can't place a piece where one still exists — you must wait for it to disappear. <br>Use this timing to your advantage and outsmart your opponent!",
     "modesTitle": "Modes Explained",
     "currentMode": "Highlights oldest piece of the <strong>current player</strong>",
     "memoryMode": "Highlights oldest piece for <strong>both players</strong>",

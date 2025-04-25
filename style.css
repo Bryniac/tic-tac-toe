@@ -359,6 +359,12 @@ body {
   overflow-y: auto;
   padding-right: 1rem;
   position: relative;
+  
+}
+
+p.tutorial {
+  text-align: left;
+  font-size: 1rem;
 }
 
 /*-----------closebtn-----------------*/
@@ -417,6 +423,11 @@ body.dark .close-btn:hover {
 
 .mode-icon.extreme {
   background-color: red;
+}
+
+.mode-text{
+  text-align: left;
+  font-size: 1rem;  
 }
 
 /*------------LANG-------------------*/
