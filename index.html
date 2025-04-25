@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tic Tac Toe 3</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="scoreboard">
+        <div>Player X: <span id="scoreX">0</span></div>
+        <div>Player O: <span id="scoreO">0</span></div>
+    </div>  
+  <div class="board" id="board"></div>
+  
+<button id="memoryToggle" class="brain-floating-btn">🧠</button>
+
+<div class="controls">
+  <button id="resetScoreBtn">Reset Score</button>
+  <button id="resetGameBtn">Reset Game</button>
+  <button id="themeToggle">🌙</button>
+</div>
+  
+  <div class="win-line" id="winLine"></div>
+  
+  <div id="winnerModal" class="modal hidden">
+    <div class="modal-content">
+      <p id="winnerMessage"></p>
+      <button id="playAgainBtn">Play Again</button>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

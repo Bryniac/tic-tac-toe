@@ -1,0 +1,333 @@
+/* Original (Light) Theme */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #a2cf9a; /* light background */
+    color: #002b36; /* dark text */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  /* ----------------SCOREBOARD-----------------------*/
+  .scoreboard {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    padding: 10px 0;
+    border-radius: 8px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .scoreboard div {
+    font-weight: bold;
+    padding: 6px 12px;
+    border-radius: 6px;
+    min-width: 100px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.05);
+    transition: background-color 0.3s;
+  }
+  
+  body.dark .scoreboard {
+    background-color: #032831; /* Solarized base03 */
+    color: #93a1a1; /* Solarized base1 */
+  }
+  
+  body.dark .scoreboard div {
+    background-color: #073642; /* Solarized base02 */
+  }
+/*----------------RESET BTN-----------------------------*/
+
+  #resetScoreBtn {
+    margin-top: 10px;
+    padding: 6px 12px;
+    font-size: 1rem;
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  #resetScoreBtn:hover {
+    background-color: #ff4c4c;
+  }
+  
+/*------------BOARD---------------------------------*/
+
+  #board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 6px;
+    position: relative;
+  }
+  
+/*------------CELLS---------------------------------*/
+
+  .cell {
+    width: 100px;
+    height: 100px;
+    background-color: #eee; /* light cell color */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 10px;
+    transition: background-color 0.3s;
+  }
+  
+/*-------------HIGHLIGHTS--------------------------------*/
+
+  .cell.highlight {
+    animation: pulse 1s infinite alternate;
+  }
+  
+  @keyframes pulse {
+    from {
+      background-color: #b58900; /* Solarized yellow for highlight */
+      transform: scale(1);
+    }
+    to {
+      background-color: #b58900;
+      transform: scale(1.05);
+    }
+  }
+  
+  .win-line {
+    position: absolute;
+    height: 4px;
+    background-color: #dc322f; /* Solarized red for win line */
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease-in-out;
+    z-index: 10;
+    pointer-events: none; /* Ensure the line doesn't block interactions */
+  }
+  
+  /*------------THEME---------------------------------*/
+  /* Theme toggle button */
+  #themeToggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #586e75;
+    color: #fdf6e3;
+    border: none;
+    border-radius: 50%;
+    padding: 12px 14px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: background 0.3s, transform 0.2s;
+    z-index: 1000;
+  }
+  
+  #themeToggle:hover {
+    background-color: #657b83;
+    transform: scale(1.1);
+  }
+  
+  /* Dark Theme */
+  body.dark {
+    background-color: #032831; /* Solarized dark background */
+    color: #fdf6e3; /* light text */
+  }
+  
+  body.dark .cell {
+    background-color: #073642; /* dark cell color */
+  }
+  
+  body.dark .cell.highlight {
+    animation: pulse 0.5s infinite alternate;
+    background-color: #cb4b16; /* Solarized orange for highlight */
+  }
+  
+  body.dark .win-line {
+    background-color: #dc322f; /* Solarized yellow for win line */
+  }
+  
+  body.dark #themeToggle {
+    background-color: #586e75; /* Solarized base color for button */
+  }
+  
+  body.dark #themeToggle:hover {
+    background-color: #657b83;
+  }
+
+/*------------BUTTONS---------------------------------*/  
+
+  .controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 1rem;
+  }
+  
+  button {
+    margin-top: 10px;
+  padding: 6px 12px;
+  font-size: 1rem;
+  background-color: #1972b3;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+  }
+  
+
+
+  button:hover {
+    background-color: #1fc3ec;
+  }
+  
+  .floating-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    font-size: 1.5rem;
+    background-color: #657b83;
+  }
+
+/*------------WINNER POPUP---------------------------------*/
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    transition: opacity 0.3s ease;
+  }
+  
+  .modal.hidden {
+    display: none;
+  }
+  
+  .modal-content {
+    background-color: #fff;
+    padding: 2rem 3rem;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    text-align: center;
+    font-size: 1.5rem;
+    animation: scaleIn 0.3s ease-in-out;
+  }
+  
+  .modal-content button {
+    margin-top: 1rem;
+    padding: 0.5rem 1.2rem;
+    font-size: 1rem;
+    background-color: #268bd2;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .modal-content button:hover {
+    background-color: #005f87;
+  }
+  
+  /* Dark mode */
+  body.dark .modal-content {
+    background-color: #002b36;
+    color: #93a1a1;
+  }
+  
+  body.dark .modal-content button {
+    background-color: #586e75;
+  }
+  
+  @keyframes scaleIn {
+    from {
+      transform: scale(0.9);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+
+/*------------BRAIN BTN---------------------------------*/
+
+  .brain-floating-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 48px;
+    height: 48px;
+    background-color: #657b83;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    z-index: 1000;
+  }
+  
+  .brain-floating-btn:hover {
+    background-color: #839496;
+    transform: scale(1.1);
+  }
+  
+  body.dark .brain-floating-btn {
+    background-color: #586e75;
+  }
+  
+  body.dark .brain-floating-btn:hover {
+    background-color: #93a1a1;
+  }
+
+  #memoryToggle {
+    color: white;
+    border: none;
+    font-size: 24px;
+    padding: 10px 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  #memoryToggle.memory {
+    background-color: yellow; /* Memory Mode: Yellow background with brain emoji */
+  }
+  
+  #memoryToggle.current {
+    background-color: gray; /* Current Player Mode: Gray background with brain emoji */
+  }
+  
+  #memoryToggle.extreme {
+    background-color: red; /* Extreme Mode: Red background with skull emoji */
+  }
+  
+  #memoryToggle:focus {
+    outline: none;
+  }
+  
+  /* Optional: Adding a small "pulse" effect when switching between modes for visual feedback */
+  #memoryToggle:hover {
+    transform: scale(1.1);
+  }
