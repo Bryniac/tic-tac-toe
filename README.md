@@ -1,6 +1,6 @@
 # 🧠 Tic Tac Toe: Memory Mode
 
-Tic Tac Toe with a twist — this isn't your average game!  
+Tic Tac Toe with a twist. 
 You can only have **three marks** on the board at any time. When you place a fourth, the **oldest one disappears**.  
 Think ahead, outplay your opponent, and use memory to win!
 
